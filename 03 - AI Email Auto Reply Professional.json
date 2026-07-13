@@ -1,0 +1,196 @@
+{
+  "name": "03 - AI Email Auto Reply Professional",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "91f88012-e5e5-4751-8bc4-ad9aa3a6baec",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Gmail Trigger').item.json.headers.from.split('<')[1].replace('>', '') }}",
+        "subject": "=AI Auto Reply",
+        "message": "={{$json.output}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        0
+      ],
+      "id": "73cf5eaa-0d2e-46db-a2b3-01c5a0733531",
+      "name": "Send a message",
+      "webhookId": "0b9b2a2d-c472-436d-a466-4a6ed194c628",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3t80rwOn9JNAUstX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e028c0eb-4470-4a18-a3ef-1cd0c0902230",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3t80rwOn9JNAUstX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2dee4a03-7e74-4edf-abfe-9b8e23923cbe",
+              "leftValue": "={{$json.headers.to}}",
+              "rightValue": "n8nnmb@gmail.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d56ea004-c8d7-4320-9f2c-7cf4b15e3c62",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "llama-3.1-8b-instant",
+          "mode": "list",
+          "cachedResultName": "llama-3.1-8b-instant"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        208
+      ],
+      "id": "52322dec-fd42-4fe6-847d-9179e5b42e7c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "4Jg0U3cZM0cWTBlB",
+          "name": "OpenAI account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a8431ec5-3c8a-4503-ba87-bc771addcb1c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9d7270b772b779d18a23f1ea420944d6534b2c272491151a484e2495c3db7ee7"
+  },
+  "nodeGroups": [],
+  "id": "h6wic153R8GoPJCD",
+  "tags": []
+}
