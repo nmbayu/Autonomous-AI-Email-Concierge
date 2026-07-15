@@ -13,7 +13,7 @@
         416,
         0
       ],
-      "id": "91f88012-e5e5-4751-8bc4-ad9aa3a6baec",
+      "id": "",
       "name": "AI Agent"
     },
     {
@@ -29,12 +29,12 @@
         768,
         0
       ],
-      "id": "73cf5eaa-0d2e-46db-a2b3-01c5a0733531",
+      "id": "",
       "name": "Send a message",
-      "webhookId": "0b9b2a2d-c472-436d-a466-4a6ed194c628",
+      "webhookId": "",
       "credentials": {
         "gmailOAuth2": {
-          "id": "3t80rwOn9JNAUstX",
+          "id": "",
           "name": "Gmail account"
         }
       }
@@ -58,11 +58,11 @@
         0,
         0
       ],
-      "id": "e028c0eb-4470-4a18-a3ef-1cd0c0902230",
+      "id": "",
       "name": "Gmail Trigger",
       "credentials": {
         "gmailOAuth2": {
-          "id": "3t80rwOn9JNAUstX",
+          "id": "",
           "name": "Gmail account"
         }
       }
@@ -78,7 +78,7 @@
           },
           "conditions": [
             {
-              "id": "2dee4a03-7e74-4edf-abfe-9b8e23923cbe",
+              "id": "",
               "leftValue": "={{$json.headers.to}}",
               "rightValue": "n8nnmb@gmail.com",
               "operator": {
@@ -97,7 +97,7 @@
         208,
         0
       ],
-      "id": "d56ea004-c8d7-4320-9f2c-7cf4b15e3c62",
+      "id": "",
       "name": "If"
     },
     {
@@ -117,11 +117,11 @@
         288,
         208
       ],
-      "id": "52322dec-fd42-4fe6-847d-9179e5b42e7c",
+      "id": "",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "4Jg0U3cZM0cWTBlB",
+          "id": "",
           "name": "OpenAI account 2"
         }
       }
@@ -185,12 +185,12 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "a8431ec5-3c8a-4503-ba87-bc771addcb1c",
+  "versionId": "",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "9d7270b772b779d18a23f1ea420944d6534b2c272491151a484e2495c3db7ee7"
+    "instanceId": ""
   },
   "nodeGroups": [],
-  "id": "h6wic153R8GoPJCD",
+  "id": "",
   "tags": []
 }
